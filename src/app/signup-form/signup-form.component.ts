@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validator, Validators} from '@angular/forms'
-import { validateCustom } from '../validators/custom.validator';
+import { UsernameValidators } from '../validators/username.validator';
 
 @Component({
   selector: 'signup-form',
@@ -9,13 +9,22 @@ import { validateCustom } from '../validators/custom.validator';
 })
 export class SignupFormComponent {
   form = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      validateCustom
-    ]),
-    password: new FormControl('', Validators.required)
+    account: new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        UsernameValidators.cannotContainSpace
+      ],
+      UsernameValidators.shouldBeUnique),
+      password: new FormControl('', Validators.required)
+    })
   });
+
+  login(){
+    this.form.setErrors({
+      invalidLogin: true
+    });
+  }
 
   get username() {
     return this.form.get('username');
