@@ -27,6 +27,6 @@ export class SignupFormComponent {
   }
 
   get username() {
-    return this.form.get('username');
+    return this.form.get('account.username');
   }
 }

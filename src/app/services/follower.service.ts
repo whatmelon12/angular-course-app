@@ -6,9 +6,9 @@ import { DataService } from './data.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PostService extends DataService{
+export class FollowerService extends DataService{
 
   constructor(http: Http) { 
-    super('https://jsonplaceholder.typicode.com/posts', http);
+    super('https://api.github.com/users/mosh-hamedani/followers', http);
   }
 }
